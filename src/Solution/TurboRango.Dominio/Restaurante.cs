@@ -10,9 +10,9 @@ namespace TurboRango.Dominio
     {
         internal int Capacidade { get; set; }
         internal string Nome { get; set; }
-        internal Localizacao Localizacao;
-        internal Contato Contato;
-        internal Categoria Tipo;
+        internal Localizacao Localizacao { get; set; }
+        internal Contato Contato { get; set; }
+        internal Categoria Categoria { get; set; }
 
     }
 }

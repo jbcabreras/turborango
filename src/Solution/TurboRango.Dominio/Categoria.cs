@@ -8,12 +8,12 @@ namespace TurboRango.Dominio
 {
     internal enum Categoria
     {
-        COMUM,
-        COZINHANATURAL,
-        COZINHAMEXICANA,
-        CHURRASCARIA,
-        COZINHAJAPONESA,
-        FASTFOOD,
-        PIZZARIA
+        Comum,
+        CozinhaNatural,
+        CozinhaMexicana,
+        Churrascaria,
+        CozinhaJaponesa,
+        FastFood,
+        Pizzaria
     }
 }
