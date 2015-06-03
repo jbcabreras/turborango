@@ -132,11 +132,24 @@ namespace TurboRango.ImportadorXML
                 group n by n.Attribute("categoria").Value into g
                 select new
                 {
-                    categoria = g.Key,
-                    restaurantes = g.ToList(),
+                    Categoria = g.Key,
+                    Restaurantes = g.ToList(),
                 }).ToList();
 
             return res;
          }
+
+        //1E- Crie um método que retorne as categorias que têm apenas um restaurante (oportunidade de mercado!). Assinatura do método:
+
+        public IList<Categoria> ApenasComUmRestaurante()
+        {
+            var res = (
+                from n in restaurantes
+                group n by n.Attribute("categoria").Value into g
+                where g.Count() == 1
+                select (Categoria)Enum.Parse(typeof(Categoria), g.Key, ignoreCase: true)).ToList();
+
+            return res;
+        }
     }
 }
