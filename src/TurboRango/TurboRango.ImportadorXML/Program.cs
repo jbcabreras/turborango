@@ -56,7 +56,7 @@ namespace TurboRango.ImportadorXML
             var sites = restaurantesXML.ObterSites();
             var comUmRest = restaurantesXML.ApenasComUmRestaurante();
             var maisPop = restaurantesXML.ApenasMaisPopulares();
-
+            var todosRest = restaurantesXML.TodosRestaurantes();
         }
     }
 }

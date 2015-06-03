@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using TurboRango.Dominio;
 
 namespace TurboRango.ImportadorXML
@@ -165,6 +167,39 @@ namespace TurboRango.ImportadorXML
                 ).Take(2).ToList();
 
             return res;
+        }
+
+
+        //2A - Crie um método de instância da classe RestaurantesXML que faça o mapeamento de todos os campos do XML 
+        //para o objeto Restaurante. Todas as informações devem ser públicas. Assinatura do método:
+
+        public IEnumerable<Restaurante> TodosRestaurantes()
+        {
+            return (
+                from n in restaurantes
+                let contato = n.Element("contato")
+                let site = contato != null && contato.Element("site") != null ? contato.Element("site").Value : null
+                let telefone = contato != null && contato.Element("telefone") != null ? contato.Element("telefone").Value : null
+                let localizacao = n.Element("localizacao")
+                select new Restaurante
+                {
+                    Nome = n.Attribute("nome").Value,
+                    Capacidade = Convert.ToInt32(n.Attribute("capacidade").Value),
+                    Categoria = (Categoria)Enum.Parse(typeof(Categoria), n.Attribute("categoria").Value, ignoreCase: true),
+                    Contato = new Contato
+                    {
+                        Site = site,
+                        Telefone = telefone
+                    },
+                    Localizacao = new Localizacao
+                    {
+                        Bairro = localizacao.Element("bairro").Value,
+                        Logradouro = localizacao.Element("logradouro").Value,
+                        Latitude = Convert.ToDouble(localizacao.Element("latitude").Value),
+                        Longitude = Convert.ToDouble(localizacao.Element("longitude").Value)
+                    }
+                }
+            );
         }
     }
 }
