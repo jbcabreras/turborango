@@ -86,6 +86,9 @@ namespace TurboRango.ImportadorXML
         //    throw new NotImplementedException();
         //}
 
+
+     
+        //1A - Crie um método que ordene a lista por nome ascendente. Assinatura do método:
          public IList<string> OrdenarPorNomeAsc()
         {
             var res = (
@@ -96,5 +99,17 @@ namespace TurboRango.ImportadorXML
 
             return res;
         }
+
+        //1B - Crie um método que retorne o Site dos restaurantes (que possuem site). Assinatura do método:
+         public IList<string> ObterSites()
+         {
+             var res = (
+                from n in restaurantes.Descendants("contato").Elements("site")
+                where n.Value != null
+                select n.Value
+            ).ToList();
+
+             return res;
+         }
     }
 }
