@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using TurboRango.Dominio;
 
@@ -45,6 +46,7 @@ namespace TurboRango.ImportadorXML
 
             #endregion
 
+            #region Exercicios
             const string nomeArquivo = "restaurantes.xml";
 
             var restaurantesXML = new RestaurantesXML(nomeArquivo);
@@ -57,6 +59,23 @@ namespace TurboRango.ImportadorXML
             var comUmRest = restaurantesXML.ApenasComUmRestaurante();
             var maisPop = restaurantesXML.ApenasMaisPopulares();
             var todosRest = restaurantesXML.TodosRestaurantes();
+            #endregion  
+
+            #region ADO.NET
+
+            var connString = @"Data Source=rodrigo\sqlexpress;Initial Catalog=TurboRango_dev;Integrated Security=True"; //Integrated Security=True - quando usar autenticacao windows
+
+            var acessoAoBanco = new CarinhaQueManipulaOBanco(connString);
+
+            acessoAoBanco.Inserir(new Contato
+                {
+                    Site = "www.dogao.gif",
+                    Telefone = "51 9135-4040"
+                });
+
+            IEnumerable<Contato> contatos = acessoAoBanco.GetContato();
+
+            #endregion
         }
     }
 }
