@@ -54,7 +54,7 @@ namespace TurboRango.ImportadorXML
             var porCategoria = restaurantesXML.AgruparPorCategoria();
             var porNomeAsc = restaurantesXML.OrdenarPorNomeAsc();
             var sites = restaurantesXML.ObterSites();
-            var apenasComUmRest = restaurantesXML.ApenasComUmRestaurante();
+            var comUmRest = restaurantesXML.ApenasComUmRestaurante();
 
         }
     }

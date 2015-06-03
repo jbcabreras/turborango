@@ -147,7 +147,8 @@ namespace TurboRango.ImportadorXML
                 from n in restaurantes
                 group n by n.Attribute("categoria").Value into g
                 where g.Count() == 1
-                select (Categoria)Enum.Parse(typeof(Categoria), g.Key, ignoreCase: true)).ToList();
+                select (Categoria)Enum.Parse(typeof(Categoria), g.Key, ignoreCase: true)
+                ).ToList();
 
             return res;
         }
