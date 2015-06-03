@@ -55,13 +55,13 @@ namespace TurboRango.ImportadorXML
             ).ToList();
         }
 
-        public double CapacidadeMedia()
-        {
-            return (
-                from n in restaurantes
-                select Convert.ToInt32(n.Attribute("capacidade").Value)
-            ).Average();
-        }
+        //public double CapacidadeMedia()
+        //{
+        //    return (
+        //        from n in restaurantes
+        //        select Convert.ToInt32(n.Attribute("capacidade").Value)
+        //    ).Average();
+        //}
 
         public double CapacidadeMaxima()
         {
@@ -108,6 +108,17 @@ namespace TurboRango.ImportadorXML
                 where n.Value != null
                 select n.Value
             ).ToList();
+
+             return res;
+         }
+
+        //1C - Crie um método que retorne a capacidade média dos restaurantes. Assinatura do método:
+         public double CapacidadeMedia()
+         {
+             var res = (
+                from n in restaurantes
+                select Convert.ToInt32(n.Attribute("capacidade").Value)
+            ).Average();
 
              return res;
          }
