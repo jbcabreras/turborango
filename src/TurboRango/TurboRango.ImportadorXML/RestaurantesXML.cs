@@ -122,5 +122,21 @@ namespace TurboRango.ImportadorXML
 
              return res;
          }
+
+        //1D - Crie um método que agrupe a lista de restaurantes por categoria. Assinatura do método:
+        //OBS: o retorno object é para facilitar, visto que o tipo gerado no group by é anônimo.
+        public object AgruparPorCategoria()
+         {
+            var res = (
+                from n in restaurantes
+                group n by n.Attribute("categoria").Value into g
+                select new
+                {
+                    categoria = g.Key,
+                    restaurantes = g.ToList(),
+                }).ToList();
+
+            return res;
+         }
     }
 }
