@@ -152,5 +152,19 @@ namespace TurboRango.ImportadorXML
 
             return res;
         }
+
+        //F - Crie um método que retorne as duas categorias mais populares (acima de 2 restaurantes),
+        //ordenadas por quantidade de restaurantes descendente. Assinatura do método:
+        public IList<Categoria> ApenasMaisPopulares()
+        {
+            var res = (
+                from n in restaurantes
+                group n by n.Attribute("categoria").Value into g
+                where g.Count() > 2
+                select (Categoria)Enum.Parse(typeof(Categoria), g.Key, ignoreCase: true)
+                ).Take(2).ToList();
+
+            return res;
+        }
     }
 }
