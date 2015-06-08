@@ -122,10 +122,10 @@ namespace TurboRango.ImportadorXML
 
             restaurantes.Inserir(tiririca);
 
-            foreach (var r in todos)
-            {
-                restaurantes.Inserir(r);
-            }
+            //foreach (var r in todos)
+            //{
+            //    restaurantes.Inserir(r);
+            //}
 
             var todosBD = restaurantes.Todos();
             var menorQue50 = todosBD.Where(x => x.Capacidade < 50);
