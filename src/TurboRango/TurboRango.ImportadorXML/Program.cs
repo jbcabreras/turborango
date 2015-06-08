@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TurboRango.Dominio;
+using System.Linq;
 
 namespace TurboRango.ImportadorXML
 {
@@ -97,6 +98,54 @@ namespace TurboRango.ImportadorXML
 +                    Longitude = -51.1188255
 +                }
 +            });
+
+            var restaurantes = new Restaurantes(connString);
+
+            var tiririca = new Restaurante
+            {
+                Nome = "Tiririca",
+                Capacidade = 50,
+                Categoria = Categoria.Fastfood,
+                Contato = new Contato
+                {
+                    Site = "http://github.com/tiririca",
+                    Telefone = "5555 5555"
+                },
+                Localizacao = new Localizacao
+                {
+                    Bairro = "Vila Nova",
+                    Logradouro = "ERS 239, 2755",
+                    Latitude = -29.6646122,
+                    Longitude = -51.1188255
+                }
+            };
+
+            restaurantes.Inserir(tiririca);
+
+            foreach (var r in todos)
+            {
+                restaurantes.Inserir(r);
+            }
+
+            var todosBD = restaurantes.Todos();
+            var menorQue50 = todosBD.Where(x => x.Capacidade < 50);
+            var menorQue50Linq = from r in todosBD
+                                 where r.Capacidade < 50
+                                 select r;
+
+            // Atualizar dados do restaurante...
+
+            tiririca.Capacidade = 100;
+            tiririca.Nome = "Novo Tiririca Grill";
+            tiririca.Categoria = Categoria.Churrascaria;
+            tiririca.Contato.Site = "http://www.tiriricagrill.com.br";
+            tiririca.Contato.Telefone = "5544445555";
+            tiririca.Localizacao.Bairro = "Centro";
+            tiririca.Localizacao.Logradouro = "Avenida central";
+            tiririca.Localizacao.Latitude = -29.6646122;
+            tiririca.Localizacao.Longitude = -51.1188255;
+
+            restaurantes.Atualizar(375, tiririca);
 
             #endregion
     
