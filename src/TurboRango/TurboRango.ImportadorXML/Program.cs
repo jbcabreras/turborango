@@ -63,7 +63,8 @@ namespace TurboRango.ImportadorXML
 
             #region ADO.NET
 
-            var connString = @"Data Source=rodrigo\sqlexpress;Initial Catalog=TurboRango_dev;Integrated Security=True"; //Integrated Security=True - quando usar autenticacao windows
+            //Integrated Security=True - quando usar autenticacao windows
+            var connString = @"Data Source=rodrigo\sqlexpress;Initial Catalog=TurboRango_dev;Integrated Security=True"; 
 
             var acessoAoBanco = new CarinhaQueManipulaOBanco(connString);
 
@@ -73,29 +74,34 @@ namespace TurboRango.ImportadorXML
                     Telefone = "51 9135-4040"
                 });
 
-            IEnumerable<Contato> contatos = acessoAoBanco.GetContatos();
+           
+             IEnumerable<Contato> contatos = acessoAoBanco.GetContatos();
+ 
++            var restaurantes = new Restaurantes(connString);
++
++            restaurantes.Inserir(new Restaurante
++            {
++                Nome = "Tiririca",
++                Capacidade = 50,
++                Categoria = Categoria.Fastfood,
++                Contato = new Contato
++                {
++                    Site = "http://github.com/tiririca",
++                    Telefone = "5555 5555"
++                },
++                Localizacao = new Localizacao
++                {
++                    Bairro = "Vila Nova",
++                    Logradouro = "ERS 239, 2755",
++                    Latitude = -29.6646122,
++                    Longitude = -51.1188255
++                }
++            });
 
             #endregion
+    
+        }
 
-             restaurantes.Inserir(new Restaurante
-            {
-                Nome = "Tiririca",
-                Capacidade = 50,
-                Categoria = Categoria.Fastfood,
-                Contato = new Contato
-                {
-                    Site = "http://github.com/tiririca",
-                    Telefone = "5555 5555"
-                },
-                Localizacao = new Localizacao
-                {
-                    Bairro = "Vila Nova",
-                    Logradouro = "ERS 239, 2755",
-                    Latitude = -29.6646122,
-                    Longitude = -51.1188255
-                }
-            });
-
-            }
+        public static Restaurantes restaurantes { get; set; }
     }
 }

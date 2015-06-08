@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using TurboRango.Dominio;
 
 namespace TurboRango.ImportadorXML
@@ -20,7 +21,9 @@ namespace TurboRango.ImportadorXML
         {
             using (var conexao = new SqlConnection(this.StringDeConexao))
             {
-                using (var inserirRestaurante = new SqlCommand("INSERT INTO [dbo].[Restaurante] ([Nome],[Capacidade],[Categoria],[IdContato], [IdLocalizacao]) VALUES (@Nome, @Capacidade,@Categoria, @IdContato, @IdLocalizacao); SELECT @@IDENTITY", conexao))
+                using (var inserirRestaurante = new SqlCommand("INSERT INTO [dbo].[Restaurante]" +
+                    "([Nome],[Capacidade],[Categoria],[IdContato], [IdLocalizacao])" + 
+                    "VALUES (@Nome, @Capacidade,@Categoria, @IdContato, @IdLocalizacao); SELECT @@IDENTITY", conexao))
                 {
 
                     inserirRestaurante.Parameters.Add("@Nome", SqlDbType.NVarChar).Value = restaurante.Nome;
@@ -44,7 +47,8 @@ namespace TurboRango.ImportadorXML
             int idContato;
             using (var conexao = new SqlConnection(this.StringDeConexao))
             {
-                using (var inserirContato = new SqlCommand("INSERT INTO [dbo].[Contato] ([Site],[Telefone]) VALUES (@Site, @Telefone); SELECT @@IDENTITY", conexao))
+                using (var inserirContato = new SqlCommand("INSERT INTO [dbo].[Contato]" +
+                    "([Site],[Telefone]) VALUES (@Site, @Telefone); SELECT @@IDENTITY", conexao))
                 {
                     inserirContato.Parameters.Add("@Site", SqlDbType.NVarChar).Value = contato.Site == null ? (Object)DBNull.Value : contato.Site;
                     inserirContato.Parameters.Add("@Telefone", SqlDbType.NVarChar).Value = contato.Telefone == null ? (Object)DBNull.Value : contato.Telefone;
@@ -65,7 +69,9 @@ namespace TurboRango.ImportadorXML
             int idLocalizacao;
             using (var conexao = new SqlConnection(this.StringDeConexao))
             {
-                using (var inserirLocalizacao = new SqlCommand("INSERT INTO [dbo].[Localizacao] ( [Bairro],[Logradouro], [Latitude], [Longitude] ) VALUES (@Bairro, @Logradouro, @Latitude, @Longitude); SELECT @@IDENTITY", conexao))
+                using (var inserirLocalizacao = new SqlCommand("INSERT INTO [dbo].[Localizacao]" +
+                    "( [Bairro],[Logradouro], [Latitude], [Longitude] )" +
+                    "VALUES (@Bairro, @Logradouro, @Latitude, @Longitude); SELECT @@IDENTITY", conexao))
                 {
                     inserirLocalizacao.Parameters.Add("@Bairro", SqlDbType.NVarChar).Value = localizacao.Bairro;
                     inserirLocalizacao.Parameters.Add("@Logradouro", SqlDbType.NVarChar).Value = localizacao.Logradouro;
