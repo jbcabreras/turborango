@@ -48,7 +48,7 @@
 
                         var random = gerarRandomico(0, response.length);
                         // sorteia de forma aleatória mas só escolhe entre os 10 mais próximos
-                        var escolhido = response[random % 10];
+                        var escolhido = response[random % 5];
                         feedback.text(escolhido.Nome + ' ' + round(distancia(posicaoAtual, escolhido.Localizacao)) + ' km');
 
                         console.log(response);
